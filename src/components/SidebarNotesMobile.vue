@@ -23,6 +23,11 @@ function createJot() {
     color: ''
   }
   Modal.getInstance("#jot-modal").hide();
+  saveJotData();
+}
+
+function saveJotData() {
+  localStorage.setItem('jots', JSON.stringify(AppState.notes));
 }
 
 </script>

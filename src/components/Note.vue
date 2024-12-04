@@ -17,12 +17,18 @@ watch(() => activeNote.value, () => {
 
 function updateNote() {
   notesService.updateNote(updateNoteData.value.description);
+  saveJotData();
 }
 
 function deleteNote() {
   const confirmed = confirm("Are you sure you want to delete this note?");
   if (!confirmed) return
   notesService.deleteNote();
+  saveJotData();
+}
+
+function saveJotData() {
+  localStorage.setItem('jots', JSON.stringify(AppState.notes));
 }
 
 </script>

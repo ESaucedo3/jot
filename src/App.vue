@@ -2,6 +2,20 @@
 import Sidebar from './components/SidebarNotes.vue'
 import SidebarNotesMobile from './components/SidebarNotesMobile.vue';
 import Notes from './components/Note.vue'
+import { onMounted } from 'vue';
+import { AppState } from '../appstate.js';
+import { Note } from './models/Note.js';
+onMounted(() => {
+  loadDataLocalStorage();
+});
+
+function loadDataLocalStorage() {
+  const savedJots = localStorage.getItem('jots');
+  if (!savedJots) return;
+  const acquiredJots = JSON.parse(savedJots);
+  AppState.notes = acquiredJots.map(jot => new Note(jot));
+}
+
 </script>
 
 <template>

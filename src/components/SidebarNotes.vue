@@ -15,35 +15,47 @@ function createNote() {
     color: '',
     title: '',
   }
+  saveJotData();
 }
 
-// NOTE Left Off Here
+function selectJot(note) {
+  notesService.setActiveJot(note);
+}
+
+function saveJotData() {
+  localStorage.setItem('jots', JSON.stringify(AppState.notes));
+}
 </script>
 
 <template>
   <div class="p-3">
     <h1 class="mt-1">Jots <span class="jot-count">{{ notes.length }}</span></h1>
     <hr>
-    <form @submit.prevent="createNote()">
-      <div class="d-flex align-items-center p-2">
-        <div>
-          <input v-model="jotCreationData.color" type="color" name="noteColor" id="noteColor">
-        </div>
-
-        <div>
-          <input v-model="jotCreationData.title" class="form-control" placeholder="Title">
-        </div>
-
-        <div class="flex-grow-1">
-          <button class="btn btn-outline-light rounded-pill px-3 py-1">Create Jot</button>
-        </div>
+    <form class="d-flex justify-content-between align-items-center" @submit.prevent="createNote()">
+      <div class="mb-2 mb-lg-0">
+        <input v-model="jotCreationData.color" class="color-design" type="color" name="jotColor" id="jotColor"
+          title="Select color">
+      </div>
+      <div class="mb-2 mb-lg-0">
+        <input v-model="jotCreationData.title" class="form-control" minlength="3" maxlength="15" placeholder="Title"
+          required>
+      </div>
+      <div class="mb-2 mb-lg-0">
+        <button class="btn btn-outline-light rounded">Create Jot</button>
       </div>
     </form>
-    <div class="jot-list">
+    <hr>
+    <div v-if="notes" class="jot-list">
       <div class="row gy-2">
         <div v-for="note in notes" :key="note" class="col-12">
-          <h3>{{ note.title }}</h3>
-          <p>{{ note.description }}</p>
+          <div class="jot-contain" :style="`border-left-color: ${note.color};`">
+            <div class="d-flex justify-content-between px-2">
+              <h5>{{ note.title }}</h5>
+              <p>{{ note.createdAt.toLocaleDateString() }}</p>
+            </div>
+            <p class="text-start ps-2">{{ note.description.substring(0, 50) }}...</p>
+            <button type="button" @click="selectJot(note)" class="jot-select"></button>
+          </div>
         </div>
       </div>
     </div>
@@ -74,10 +86,41 @@ h1 {
   }
 }
 
+.color-design {
+  aspect-ratio: 1/1;
+  width: 50px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  overflow: hidden;
+}
+
+.jot-contain {
+  border-left: 2px solid;
+  position: relative;
+}
+
+.jot-select {
+  background: none;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .jot-list {
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 70vh;
   max-height: 70dvh;
+}
+
+@media (width <=992px) {
+  form {
+    flex-direction: column;
+  }
 }
 </style>
