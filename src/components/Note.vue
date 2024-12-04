@@ -31,6 +31,7 @@ function saveJotData() {
   localStorage.setItem('jots', JSON.stringify(AppState.notes));
 }
 
+
 </script>
 
 <template>
