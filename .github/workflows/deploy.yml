@@ -1,0 +1,29 @@
+name: Deploy Jot
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, 'deploy')
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: NodeJS Setup
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build The Client
+        run: |
+          npm ci && npm run build
+
+      - name: Deployment
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
