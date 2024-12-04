@@ -1,5 +1,16 @@
-# Vue 3 + Vite
+# About Jot
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Jot is an application designed for users who want a simple yet effective tool for creating and managing notes. Whether you need to jot down quick thoughts, organize your ideas, or create to-do lists, Jot is your go-to solution. The application focuses on simplicity and usability, ensuring a smooth experience for users who want to stay organized.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Key Features
+
+- **Note Management**: Easily create, read, update, and delete notes (jots).
+- **Persistent Data Storage**: Leveraging local storage, your jots remain accessible even after you close the browser, ensuring you never lose your notes.
+
+## Technologies Used
+
+- HTML
+- CSS
+- JavaScript
+- VueJS
+- Bootstrap
