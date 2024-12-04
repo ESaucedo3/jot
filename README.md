@@ -14,3 +14,6 @@ Jot is an application designed for users who want a simple yet effective tool fo
 - JavaScript
 - VueJS
 - Bootstrap
+
+## View the application itself
+You can see the application in action and how it works using the link here or up above: https://esaucedo3.github.io/jot/
